@@ -1,7 +1,9 @@
+from collections.abc import Iterable
 from django.db import models
 from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.utils.text import slugify
 
 # Create your models here.
 FLAG_TYPES=(
@@ -19,7 +21,12 @@ class Product(models.Model):
     image=models.ImageField(upload_to='product')
     tags = TaggableManager()
     brand=models.ForeignKey('Brand',related_name='product_brand',on_delete=models.SET_NULL,null=True)
-
+    
+    slug=models.SlugField(blank=True,null=True)
+    def save(self,*args,**kwargs):
+        self.slug=slugify(self.name)
+        super(Product,self).save(*args,**kwargs)
+        
 class ProductImages(models.Model):
     product=models.models.ForeignKey(Product,related_name='product_imge',on_delete=models.CASCADE)
     image=models.ImageField(upload_to='product_images')
@@ -27,6 +34,11 @@ class ProductImages(models.Model):
 class Brand(models.Model):
     name=models.CharField(max_length=100)
     image=models.ImageField(upload_to='brand')
+    
+    slug=models.SlugField(blank=True,null=True)
+    def save(self,*args,**kwargs):
+        self.slug=slugify(self.name)
+        super(Product,self).save(*args,**kwargs)
 
 class Review(models.Model):
     user = models.ForeignKey(User,related_name='review_user',on_delete=models.SET_NULL,null=True)
