@@ -33,4 +33,4 @@ class Review(models.Model):
     product=models.ForeignKey(Product,related_name='review_product',on_delete=models.CASCADE)
     review=models.TextField(max_length=500)
     rate=models.IntegerField(choices=[(i,i) for i in range(1,6)])
-    created_at = models.DateTimeField(default=timezone)
+    created_at = models.DateTimeField(default=timezone.now)
