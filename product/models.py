@@ -24,9 +24,13 @@ class Product(models.Model):
     brand=models.ForeignKey('Brand',verbose_name=_('brand'),related_name='product_brand',on_delete=models.SET_NULL,null=True)
     
     slug=models.SlugField(blank=True,null=True)
+    
     def save(self,*args,**kwargs):
         self.slug=slugify(self.name)
         super(Product,self).save(*args,**kwargs)
+        
+    def __str__(self):
+        return self.name    
         
 class ProductImages(models.Model):
     product=models.models.ForeignKey(Product,verbose_name=_('product'),related_name='product_imge',on_delete=models.CASCADE)
@@ -37,9 +41,15 @@ class Brand(models.Model):
     image=models.ImageField(_('image'),upload_to='brand')
     
     slug=models.SlugField(blank=True,null=True)
+    
     def save(self,*args,**kwargs):
         self.slug=slugify(self.name)
         super(Product,self).save(*args,**kwargs)
+        
+    def __str__(self):
+        return self.name     
+        
+        
 
 class Review(models.Model):
     user = models.ForeignKey(User,verbose_name=_('user'),related_name='review_user',on_delete=models.SET_NULL,null=True)
@@ -47,3 +57,7 @@ class Review(models.Model):
     review=models.TextField(_('review'),max_length=500)
     rate=models.IntegerField(_('rate'),choices=[(i,i) for i in range(1,6)])
     created_at = models.DateTimeField(default=timezone.now)
+    
+    
+    def __str__(self):
+        return f"{self.user} - {self.product} - {self.rate}"
