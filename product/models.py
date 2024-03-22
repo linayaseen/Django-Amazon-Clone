@@ -8,10 +8,11 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 FLAG_TYPES=(
-    ('NEW','NEW')
-    ('Sale','Sale')
+    ('NEW','NEW'),
+    ('Sale','Sale'),
     ('Feature','Feature')
 )
+
 class Product(models.Model):
     name =models.CharField(_('name'),max_length=120,)
     flag= models.CharField(_('flag'),max_length=10)
@@ -33,7 +34,7 @@ class Product(models.Model):
         return self.name    
         
 class ProductImages(models.Model):
-    product=models.models.ForeignKey(Product,verbose_name=_('product'),related_name='product_imge',on_delete=models.CASCADE)
+    product=models.ForeignKey(Product,verbose_name=_('product'),related_name='product_imge',on_delete=models.CASCADE)
     image=models.ImageField(_('image'),upload_to='product_images')
 
 class Brand(models.Model):
