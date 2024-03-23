@@ -7,6 +7,7 @@ from .models import Product,Brand,Review ,ProductImages
 
 class ProductList(ListView):
     model=Product
+    paginate_by = 50
     
 #context{},queryset: product.object.all(): 1:option 2:method :override
 #queryset: main data :datail product 
@@ -27,6 +28,7 @@ class ProductDetail(DetailView):
     
 class BrandList(ListView):
     model=Brand 
+    paginate_by = 50
     
 
 class BrandDetail(ListView):
