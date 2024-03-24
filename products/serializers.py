@@ -1,6 +1,15 @@
 from rest_framework import serializers
-from .models import Product,Brand
+from .models import Product,Brand,ProductImages,Review
 
+
+class ProductImagesSerializer(serializers.ModelSerializer):
+    model=ProductImages
+    fields=['image']
+
+class ProductReviewsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model =Review
+        fields=['user','review','rate','created_at']
 
 class ProductListSerializer(serializers.ModelSerializer):
     brand = serializers.StringRelatedField
@@ -31,6 +40,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     brand = serializers.StringRelatedField
     review_count=serializers.SerializerMethodField()
     avg_rate = serializers.SerializerMethodField()
+    image = ProductImagesSerializer(source='product_image',many=True)
+    reviews=ProductReviewsSerializer(source='review_product',many=True)
     class Meta:
         model =Product
         fields='__all__'
