@@ -32,7 +32,12 @@ class Product(models.Model):
         super(Product,self).save(*args,**kwargs)
         
     def __str__(self):
-        return self.name    
+        return self.name 
+    def lina(self):
+        pass
+    class Meta:
+        ordering =['-id']
+        verbose_name = 'Product'
         
 class ProductImages(models.Model):
     product=models.ForeignKey(Product,verbose_name=_('product'),related_name='product_imge',on_delete=models.CASCADE)
