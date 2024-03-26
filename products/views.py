@@ -1,4 +1,5 @@
 from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 
@@ -83,7 +84,7 @@ def mydebug(request):
     
     # annotation
     #data=Product.objects.annotate(is_new=Value(0))
-    data=Product.objects.annotate(price_with_tax=F('price')*1.15)
+    #data=Product.objects.annotate(price_with_tax=F('price')*1.15)
     
     
     
@@ -114,6 +115,10 @@ class ProductDetail(DetailView):
 class BrandList(ListView):
     model=Brand 
     paginate_by = 50
+    queryset= Brand.objects.annotate(product_count=Count('product_brand'))
+    
+    #def get_queryset(self):
+     #   return super().get_queryset()
     
 
 class BrandDetail(ListView):
@@ -128,7 +133,7 @@ class BrandDetail(ListView):
     
     def get_context_data(self, **kwargs) :
         context = super().get_context_data(**kwargs)
-        context["brand"]= Brand.objects.get(slug=self.kwargs['slug'])
+        context["brand"]= Brand.objects.filter(slug=self.kwargs['slug']).annotate(Product_count=Count('product_brand'))[0]
         return context
     
          
