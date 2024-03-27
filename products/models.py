@@ -33,11 +33,26 @@ class Product(models.Model):
         
     def __str__(self):
         return self.name 
-    def lina(self):
-        pass
+    
+    def review_count(self):
+        reviews = object.review_product.all().count()
+        return reviews
+    
+    def avg_rate(self,object):
+        total=0 #sum rate : object
+        reviews = object.review_product.all()
+        if len(reviews)>0:
+            for item in reviews:
+                total+=item.rate 
+            avg= total/len(reviews)
+        else: 
+            avg =0
+        return avg
+             
     class Meta:
         ordering =['-id']
         verbose_name = 'Product'
+        verbose_name_plural='products'
         
 class ProductImages(models.Model):
     product=models.ForeignKey(Product,verbose_name=_('product'),related_name='product_imge',on_delete=models.CASCADE)
