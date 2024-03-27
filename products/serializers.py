@@ -47,10 +47,14 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         fields='__all__'
         
     def get_review_count(self,object):
-        reviews = object.review_product.all().count()
+        #reviews = object.review_product.all().count()
+        reviews =  object.review_count()
         return reviews
     
     def get_avg_rate(self,object):
+        avg= object.avg_rate()
+        return avg
+        '''
         total=0 #sum rate : object
         reviews = object.review_product.all()
         if len(reviews)>0:
@@ -60,7 +64,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         else: 
             avg =0
         return avg
-             
+            ''' 
         
         
 class BrandListSerializer(serializers.ModelSerializer):
