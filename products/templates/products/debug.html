@@ -8,18 +8,25 @@
     <title>Document</title>
   </head>
   <body>
+     {% comment %}
     <p>{{ data }}</p>
      
-    {% comment %}
-      
    
-       
+      {% endcomment %}
+   
+        {% comment %}
     <ul>
         {% for object in data %}
         <li> {{object}} - {{object.price}} #- {{object.brand}} #</li>
         {% endfor %}
         </ul>
-         {% endcomment %}
+        {% endcomment %}
+        <ul>
+          {% for object in data %}
+          <li> {{object}} - {{object.brand}} </li>
+          {% endfor %}
+          </ul>
+
   </body>
 </html>
 
