@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from taggit.serializers import TagListSerializerField, TaggitSerializer
 from .models import Product,Brand,ProductImages,Review
 
 
@@ -11,15 +12,16 @@ class ProductReviewsSerializer(serializers.ModelSerializer):
         model =Review
         fields=['user','review','rate','created_at']
 
-class ProductListSerializer(serializers.ModelSerializer):
+class ProductListSerializer(TaggitSerializer,serializers.ModelSerializer):
     brand = serializers.StringRelatedField
-    review_count=serializers.SerializerMethodField()
-    avg_rate = serializers.SerializerMethodField()
+    tags = TagListSerializerField()
+    #review_count=serializers.SerializerMethodField()
+    #avg_rate = serializers.SerializerMethodField()
     class Meta:
         model =Product
-        fields='__all__'
+        fields=['name','price','flag','subtitle','description','sku','brand','review_count','avg_rate','tags']
         
-        
+        '''
     def get_review_count(self,object):
         reviews = object.review_product.all().count()
         return reviews
@@ -34,17 +36,18 @@ class ProductListSerializer(serializers.ModelSerializer):
         else: 
             avg =0
         return avg
-             
+           '''  
         
-class ProductDetailSerializer(serializers.ModelSerializer):
+class ProductDetailSerializer(TaggitSerializer,serializers.ModelSerializer):
     brand = serializers.StringRelatedField
     #review_count=serializers.SerializerMethodField()
     #avg_rate = serializers.SerializerMethodField()
     image = ProductImagesSerializer(source='product_image',many=True)
     reviews=ProductReviewsSerializer(source='review_product',many=True)
+    tags = TagListSerializerField()
     class Meta:
         model =Product
-        fields='__all__'
+        fields=['name','price','flag','subtitle','description','sku','brand','review_count','avg_rate','image','reviews','tags']
     ''' 
     def get_review_count(self,object):
         #reviews = object.review_product.all().count()
