@@ -1,6 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import ListView,DetailView
 
 from .models import Product,Brand,Review ,ProductImages
@@ -150,3 +150,18 @@ class BrandDetail(DetailView):
         return context
     
 '''
+def add_review(request,slug):
+    product=Product.objects.get(slug=slug)
+    review=request.POST['review'] #request.POST['review'] or #request.POST.get('review')
+    rate=request.POST['rating']    
+    #add review
+    Review.objects.create(
+        user=request.user,
+        product=product,
+        review=review,
+        rate=rate
+        
+    )
+    
+    # return product detail
+    return redirect(f'/products/{slug}')
