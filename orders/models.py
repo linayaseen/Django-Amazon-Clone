@@ -29,7 +29,7 @@ class OrderDetail(models.Model):
     product= models.ForeignKey(Product,related_name='orderdetail_product',on_delete=models.SET_NULL,null=True,blank=True)
     quantity=models.IntegerField()
     price=models.FloatField()
-    total=models.FloatField()
+    total=models.FloatField(null=True,blank=True)
     
     
     
@@ -48,7 +48,7 @@ class CartDetail(models.Model):
     product= models.ForeignKey(Product,related_name='cartdetail_product',on_delete=models.SET_NULL,null=True,blank=True)
     quantity=models.IntegerField(default=1)
     #price=models.FloatField()
-    total=models.FloatField(True,blank=True)
+    total=models.FloatField(null=True,blank=True)
     
 class Coupon(models.Model):
     code=models.CharField(max_length=20)

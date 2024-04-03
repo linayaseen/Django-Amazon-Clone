@@ -17,3 +17,15 @@ class Settings(models.Model):
     
     def __str__(self):
         return self.name
+    
+'''
+class location(models.Model):
+     name='' #save
+'''  
+class DeliveryFee(models.Model):
+    #location='' #fk
+    fee=models.IntegerField()
+    
+    def __str__(self):
+        return str(self.fee)
+    
