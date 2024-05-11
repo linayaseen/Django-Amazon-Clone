@@ -19,7 +19,7 @@ def signup(request):
         if form.is_valid():
             usename=form.cleaned_data['username']
             email=form.cleaned_data['email']
-            user=form.save(comit=False)
+            user=form.save(commit=False)
             user.is_active=False
             
             form.save()  #trigger signal-->create profile:code

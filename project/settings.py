@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,11 +44,12 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'debug_toolbar',
+    "django_bootstrap5",
     #Apps
     'products',
     'settings',
     'orders',
-    'accounts'
+   
    
 ]
 #Restapi
@@ -166,6 +168,9 @@ CACHES = {
 AUTHENTICATION_BACKENDS=[
     'accounts.backend.EmailOrUsernameLogin'
 ]
+
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/'
 
 #EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
