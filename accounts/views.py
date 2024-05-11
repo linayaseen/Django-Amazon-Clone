@@ -7,6 +7,13 @@ from django.core.mail import send_mail
 # Create your views here.
 
 def signup(request):
+    '''
+    - create new user
+    - send email : code
+    - redirect : activate
+    '''
+    if request.user.is_uthenticated:
+        return redirect('/')
     if request.method== 'POST':
         form=SignuoForm(request.POST)
         if form.is_valid():
