@@ -98,6 +98,11 @@ class ProductList(ListView):
     model=Product
     paginate_by = 50
     
+    #def get_queryset(self):
+     #   QuerySet=super().get_queryset()
+      #  QuerySet=QuerySet.filter(quantity__gt=0)
+       # return QuerySet
+    
 #context{},queryset: product.object.all(): 1:option 2:method :override
 #queryset: main data :datail product 
 #context: extra data :reviews, images
