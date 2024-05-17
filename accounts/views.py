@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from.forms import SignuoForm,UserActivateForm
 from.models import Profile
 from django.core.mail import send_mail
+from products.models import Product, Brand,Review
+from orders.models import Order
 
 # Create your views here.
 
@@ -71,3 +73,26 @@ def user_activate(request,username):
 code--->activate
 redirect : login
 '''
+def dashboard (request):
+    users=User.object.all().count()
+    product=Product.object.all().count()
+    orders=Order.object.all().count()
+    brands=Brand.object.all().count()
+    reviews=Review.object.all().count()
+    
+    new_products=Product.objects.filter(flag='New').count()
+    sale_products=Product.objects.filter(flag='Sale').count()
+    feature_products=Product.objects.filter(flag='Feature').count()
+    return render(request,'accounts/dashboard.html',{
+        'users': users',
+        'products': products,
+        'orders':orders,
+        'brands':brands,
+        'reviews':reviews,
+        'new_products': new_products,
+        'sale_products':sale_products,
+        'feature_products':feature_products,
+        
+        
+    })
+    
