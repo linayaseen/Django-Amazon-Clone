@@ -85,6 +85,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'context_cache.middleare.ContextCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -158,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ar'
 
 TIME_ZONE = 'UTC'
 
@@ -191,6 +192,13 @@ CACHES = {
 }
 AUTHENTICATION_BACKENDS=[
     'accounts.backend.EmailOrUsernameLogin'
+]
+
+# translation
+LOCAL_PATH =['locale']
+LANGUAGES = [
+    ("ar", "Arabic"),
+    ("en", "English"),
 ]
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)

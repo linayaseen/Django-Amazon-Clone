@@ -84,8 +84,8 @@ def dashboard (request):
     sale_products=Product.objects.filter(flag='Sale').count()
     feature_products=Product.objects.filter(flag='Feature').count()
     return render(request,'accounts/dashboard.html',{
-        'users': users',
-        'products': products,
+        'users': users,
+        'products': product,
         'orders':orders,
         'brands':brands,
         'reviews':reviews,
