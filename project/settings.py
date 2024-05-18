@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +53,8 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'dj_rest_auth'
+    'dj_rest_auth',
+   
     #Apps
     'products',
     'settings',
@@ -203,6 +205,7 @@ LANGUAGES = [
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 #EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -211,3 +214,11 @@ EMAIL_HOST_USER ="password"#check video 1:00 to generate it
 EMAIL_HOST_PASSWORD="pythondeveloper6@gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+#STRIP SETTINGS
+STRIPE_API_KEY_PUBLISHABLE= os.getenv('STRIPE_API_KEY_PUBLISHABLE')
+STRIPE_API_KEY_SECRET= os.getenv('STRIPE_API_KEY_SECRET')
+
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
