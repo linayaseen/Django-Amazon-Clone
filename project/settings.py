@@ -203,16 +203,20 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
     #}
 #}
 
-#CACHES = {
-#    "default": {
-#        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-#       "LOCATION": "redis://redis:6379/0",
-#    }
-#}
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+       "LOCATION": "redis://redis:6379/0",
+    }
+}
 
 # Celery && redis
+#CELERY_BROKER_URL='redis://redis:6379/0'
+#CELERY_BACKEND_RESULTS='redis://redis:6379/0'
+
 CELERY_BROKER_URL='redis://redis:6379/0'
 CELERY_BACKEND_RESULTS='redis://redis:6379/0'
+
 
 
 AUTHENTICATION_BACKENDS=[
