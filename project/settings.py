@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'dj_rest_auth'
+    'dj_rest_auth',
     #Apps
     'products',
     'settings',
@@ -85,16 +85,16 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
-    'context_cache.middleare.ContextCacheMiddleware',
+    'context_cache.middleware.ContextCacheMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
-    
-    
+
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -203,12 +203,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
     #}
 #}
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-       "LOCATION": "redis://redis:6379/0",
-    }
-}
+#CACHES = {
+ #   "default": {
+  #      "BACKEND": "django.core.cache.backends.redis.RedisCache",
+   #    "LOCATION": "redis://redis:6379/0",
+    #}
+#}
 
 # Celery && redis
 #CELERY_BROKER_URL='redis://redis:6379/0'

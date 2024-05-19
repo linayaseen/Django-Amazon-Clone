@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from.forms import SignuoForm,UserActivateForm
+from.forms import SignupForm,UserActivateForm
 from.models import Profile
 from django.core.mail import send_mail
 from products.models import Product, Brand,Review
@@ -17,7 +17,7 @@ def signup(request):
     if request.user.is_uthenticated:
         return redirect('/')
     if request.method== 'POST':
-        form=SignuoForm(request.POST)
+        form=SignupForm(request.POST)
         if form.is_valid():
             usename=form.cleaned_data['username']
             email=form.cleaned_data['email']
@@ -37,7 +37,7 @@ def signup(request):
             return redirect(f'/account/{username}/activate')
         
     else:
-        form=SignuoForm()
+        form=SignupForm()
     return render(request,'accounts/signup.html',{'form':form})
        
     
